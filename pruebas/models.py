@@ -346,172 +346,175 @@ class ElectricaTrafo(models.Model):
 
 
 # Prueba Cromatografía de gases y atributos relacionados
-# class EstatusPrueba(models.Model):
-#     name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
-#
-#     def __str__(self):
-#         return self.name
-#
-#     class Meta:
-#         verbose_name = 'Estatus de Prueba'
-#         verbose_name_plural = 'Estatus de Pruebas'
-#         ordering = ['name', ]
-#
-#
-# class CromatografiaGases(models.Model):
-#     estatus_prueba = models.ForeignKey(EstatusPrueba, on_delete=models.CASCADE, verbose_name='Estatus de Prueba')
-#     prueba = models.ForeignKey(Prueba, on_delete=models.CASCADE, verbose_name='Prueba')
-#
-#     def __str__(self):
-#         return self.prueba.matricula
-#
-#     class Meta:
-#         verbose_name = 'Cromatografía de Gases'
-#         verbose_name_plural = 'Cromatografías de Gases'
-#         ordering = ['prueba__matricula', ]
-#
-#
-# class CromatografiaGasesRelacionO2N2(models.Model):
-#     edad = models.FloatField(verbose_name='Edad', null=True, blank=True)
-#     o2 = models.FloatField(verbose_name='O2', null=True, blank=True)
-#     n2 = models.FloatField(verbose_name='N2', null=True, blank=True)
-#     o2entren2 = models.FloatField(verbose_name='O2 entre N2', null=True, blank=True)
-#     h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
-#     ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
-#     co = models.FloatField(verbose_name='CO', null=True, blank=True)
-#     c2h6 = models.FloatField(verbose_name='C2H6', null=True, blank=True)
-#     co2 = models.FloatField(verbose_name='CO2', null=True, blank=True)
-#     c2h4 = models.FloatField(verbose_name='C2H4', null=True, blank=True)
-#     c2h2 = models.FloatField(verbose_name='C2H2', null=True, blank=True)
-#     total_gc = models.FloatField(verbose_name='Total GC', null=True, blank=True)
-#     p_incremento = models.FloatField(verbose_name='% Incremento', null=True, blank=True)
-#     p_tgc_referencia = models.FloatField(verbose_name='% TGC Referencia', null=True, blank=True)
-#     p_tgc_ultimo = models.FloatField(verbose_name='% TGC Último', null=True, blank=True)
-#     diferencial = models.FloatField(verbose_name='Diferencial', null=True, blank=True)
-#     absoluto = models.FloatField(verbose_name='Absoluto', null=True, blank=True)
-#     cromatografia_gases = models.ForeignKey(CromatografiaGases, on_delete=models.CASCADE, verbose_name='Cromatografía de Gases')
-#     create = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
-#     modify = models.DateTimeField(auto_now=True, verbose_name='Modificado')
-#
-#     def __str__(self):
-#         return self.cromatografia_gases.prueba.matricula
-#
-#     class Meta:
-#         verbose_name = 'Relación O2/N2'
-#         verbose_name_plural = 'Relaciones O2/N2'
-#         ordering = ['cromatografia_gases__prueba__matricula', ]
-#
-#     @property
-#     def get_prueba(self):
-#         return self.cromatografia_gases.prueba.matricula
-#
-#     @property
-#     def get_trafo(self):
-#         return self.cromatografia_gases.prueba.trafo.name
-#
-#     @property
-#     def get_unidades(self):
-#         return ", ".join([unidad.name for unidad in self.cromatografia_gases.prueba.trafo.unidades.all()])
-#
-#     @property
-#     def get_central(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.name
-#
-#     @property
-#     def get_subgerencia(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.name
-#
-#     @property
-#     def get_eps(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
-#
-#
-# class Diferencial_O2N2(models.Model):
-#     h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
-#     ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
-#     co = models.FloatField(verbose_name='CO', null=True, blank=True)
-#     c2h6 = models.FloatField(verbose_name='C2H6', null=True, blank=True)
-#     co2 = models.FloatField(verbose_name='CO2', null=True, blank=True)
-#     c2h4 = models.FloatField(verbose_name='C2H4', null=True, blank=True)
-#     c2h2 = models.FloatField(verbose_name='C2H2', null=True, blank=True)
-#     cromatografia_gases = models.ForeignKey(CromatografiaGases, on_delete=models.CASCADE, verbose_name='Cromatografía de Gases')
-#     create = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
-#     modify = models.DateTimeField(auto_now=True, verbose_name='Modificado')
-#
-#     def __str__(self):
-#         return self.cromatografia_gases.prueba.matricula
-#
-#     class Meta:
-#         verbose_name = 'Diferencial O2/N2'
-#         verbose_name_plural = 'Diferenciales O2/N2'
-#         ordering = ['cromatografia_gases__prueba__matricula', ]
-#
-#     @property
-#     def get_prueba(self):
-#         return self.cromatografia_gases.prueba.matricula
-#
-#     @property
-#     def get_trafo(self):
-#         return self.cromatografia_gases.prueba.trafo.name
-#
-#     @property
-#     def get_unidades(self):
-#         return ", ".join([unidad.name for unidad in self.cromatografia_gases.prueba.trafo.unidades.all()])
-#
-#     @property
-#     def get_central(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.name
-#
-#     @property
-#     def get_subgerencia(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.name
-#
-#     @property
-#     def get_eps(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
-#
-#
-# class VelocidadEntrePruebas(models.Model):
-#     meses_entre_pruebas = models.FloatField(verbose_name='Meses entre Pruebas', null=True, blank=True)
-#     h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
-#     ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
-#     co = models.FloatField(verbose_name='CO', null=True, blank=True)
-#     c2h6 = models.FloatField(verbose_name='C2H6', null=True, blank=True)
-#     co2 = models.FloatField(verbose_name='CO2', null=True, blank=True)
-#     c2h4 = models.FloatField(verbose_name='C2H4', null=True, blank=True)
-#     c2h2 = models.FloatField(verbose_name='C2H2', null=True, blank=True)
-#
-#     def __str__(self):
-#         return self.cromatografia_gases.prueba.matricula
-#
-#     class Meta:
-#         verbose_name = 'Velocidad entre Pruebas'
-#         verbose_name_plural = 'Velocidades entre Pruebas'
-#         ordering = ['cromatografia_gases__prueba__matricula', ]
-#
-#     @property
-#     def get_prueba(self):
-#         return self.cromatografia_gases.prueba.matricula
-#
-#     @property
-#     def get_trafo(self):
-#         return self.cromatografia_gases.prueba.trafo.name
-#
-#     @property
-#     def get_unidades(self):
-#         return ", ".join([unidad.name for unidad in self.cromatografia_gases.prueba.trafo.unidades.all()])
-#
-#     @property
-#     def get_central(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.name
-#
-#     @property
-#     def get_subgerencia(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.name
-#
-#     @property
-#     def get_eps(self):
-#         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
+class EstatusPrueba(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Estatus de Prueba'
+        verbose_name_plural = 'Estatus de Pruebas'
+        ordering = ['name', ]
+
+
+class CromatografiaGases(models.Model):
+    estatus_prueba = models.ForeignKey(EstatusPrueba, on_delete=models.CASCADE, verbose_name='Estatus de Prueba')
+    prueba = models.ForeignKey(Prueba, on_delete=models.CASCADE, verbose_name='Prueba')
+
+    def __str__(self):
+        return self.prueba.matricula
+
+    class Meta:
+        verbose_name = 'Cromatografía de Gases'
+        verbose_name_plural = 'Cromatografías de Gases'
+        ordering = ['prueba__matricula', ]
+
+
+class CromatografiaGasesRelacionO2N2(models.Model):
+    edad = models.FloatField(verbose_name='Edad', null=True, blank=True)
+    o2 = models.FloatField(verbose_name='O2', null=True, blank=True)
+    n2 = models.FloatField(verbose_name='N2', null=True, blank=True)
+    o2entren2 = models.FloatField(verbose_name='O2 entre N2', null=True, blank=True)
+    h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
+    ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
+    co = models.FloatField(verbose_name='CO', null=True, blank=True)
+    c2h6 = models.FloatField(verbose_name='C2H6', null=True, blank=True)
+    co2 = models.FloatField(verbose_name='CO2', null=True, blank=True)
+    c2h4 = models.FloatField(verbose_name='C2H4', null=True, blank=True)
+    c2h2 = models.FloatField(verbose_name='C2H2', null=True, blank=True)
+    total_gc = models.FloatField(verbose_name='Total GC', null=True, blank=True)
+    p_incremento = models.FloatField(verbose_name='% Incremento', null=True, blank=True)
+    p_tgc_referencia = models.FloatField(verbose_name='% TGC Referencia', null=True, blank=True)
+    p_tgc_ultimo = models.FloatField(verbose_name='% TGC Último', null=True, blank=True)
+    diferencial = models.FloatField(verbose_name='Diferencial', null=True, blank=True)
+    absoluto = models.FloatField(verbose_name='Absoluto', null=True, blank=True)
+    cromatografia_gases = models.ForeignKey(CromatografiaGases, on_delete=models.CASCADE, verbose_name='Cromatografía de Gases')
+    create = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
+    modify = models.DateTimeField(auto_now=True, verbose_name='Modificado')
+
+    def __str__(self):
+        return self.cromatografia_gases.prueba.matricula
+
+    class Meta:
+        verbose_name = 'Relación O2/N2'
+        verbose_name_plural = 'Relaciones O2/N2'
+        ordering = ['cromatografia_gases__prueba__matricula', ]
+
+    @property
+    def get_prueba(self):
+        return self.cromatografia_gases.prueba.matricula
+
+    @property
+    def get_trafo(self):
+        return self.cromatografia_gases.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.cromatografia_gases.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+class Diferencial_O2N2(models.Model):
+    h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
+    ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
+    co = models.FloatField(verbose_name='CO', null=True, blank=True)
+    c2h6 = models.FloatField(verbose_name='C2H6', null=True, blank=True)
+    co2 = models.FloatField(verbose_name='CO2', null=True, blank=True)
+    c2h4 = models.FloatField(verbose_name='C2H4', null=True, blank=True)
+    c2h2 = models.FloatField(verbose_name='C2H2', null=True, blank=True)
+    cromatografia_gases = models.ForeignKey(CromatografiaGases, on_delete=models.CASCADE, verbose_name='Cromatografía de Gases')
+    create = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
+    modify = models.DateTimeField(auto_now=True, verbose_name='Modificado')
+
+    def __str__(self):
+        return self.cromatografia_gases.prueba.matricula
+
+    class Meta:
+        verbose_name = 'Diferencial O2/N2'
+        verbose_name_plural = 'Diferenciales O2/N2'
+        ordering = ['cromatografia_gases__prueba__matricula', ]
+
+    @property
+    def get_prueba(self):
+        return self.cromatografia_gases.prueba.matricula
+
+    @property
+    def get_trafo(self):
+        return self.cromatografia_gases.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.cromatografia_gases.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+class VelocidadEntrePruebas(models.Model):
+    meses_entre_pruebas = models.FloatField(verbose_name='Meses entre Pruebas', null=True, blank=True)
+    h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
+    ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
+    co = models.FloatField(verbose_name='CO', null=True, blank=True)
+    c2h6 = models.FloatField(verbose_name='C2H6', null=True, blank=True)
+    co2 = models.FloatField(verbose_name='CO2', null=True, blank=True)
+    c2h4 = models.FloatField(verbose_name='C2H4', null=True, blank=True)
+    c2h2 = models.FloatField(verbose_name='C2H2', null=True, blank=True)
+    cromatografia_gases = models.ForeignKey(CromatografiaGases, on_delete=models.CASCADE, verbose_name='Cromatografía de Gases')
+    create = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
+    modify = models.DateTimeField(auto_now=True, verbose_name='Modificado')
+
+    def __str__(self):
+        return self.cromatografia_gases.prueba.matricula
+
+    class Meta:
+        verbose_name = 'Velocidad entre Pruebas'
+        verbose_name_plural = 'Velocidades entre Pruebas'
+        ordering = ['cromatografia_gases__prueba__matricula', ]
+
+    @property
+    def get_prueba(self):
+        return self.cromatografia_gases.prueba.matricula
+
+    @property
+    def get_trafo(self):
+        return self.cromatografia_gases.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.cromatografia_gases.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
 
 
 # Prueba Físico Químicas y atributos relacionados
