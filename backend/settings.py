@@ -54,6 +54,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
+
 SITE_URL = "http:127.0.0.1:8000"
 
 CORS_ORIGIN_ALLOW_ALL = True

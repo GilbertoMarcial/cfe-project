@@ -3,6 +3,7 @@ from .models import *
 from django.http import HttpResponse
 
 
+# EPS, Subgerencia, Central, Unidad y Equipo
 class AdminEPS(admin.ModelAdmin):
     list_display = ['name', 'create', 'modify', ]
     list_filter = ['create', 'modify', ]
@@ -11,6 +12,9 @@ class AdminEPS(admin.ModelAdmin):
 
     class Meta:
         model = EPS
+
+
+admin.site.register(EPS, AdminEPS)
 
 
 class AdminSubgerencia(admin.ModelAdmin):
@@ -23,6 +27,9 @@ class AdminSubgerencia(admin.ModelAdmin):
         model = Subgerencia
 
 
+admin.site.register(Subgerencia, AdminSubgerencia)
+
+
 class AdminCentral(admin.ModelAdmin):
     list_display = ['alias', 'name', 'subgerencia', 'create', 'modify', ]
     list_filter = ['create', 'modify', ]
@@ -33,6 +40,9 @@ class AdminCentral(admin.ModelAdmin):
         model = Central
 
 
+admin.site.register(Central, AdminCentral)
+
+
 class AdminUnidad(admin.ModelAdmin):
     list_display = ['name', 'central', 'create', 'modify', ]
     list_filter = ['create', 'modify', ]
@@ -41,6 +51,9 @@ class AdminUnidad(admin.ModelAdmin):
 
     class Meta:
         model = Unidad
+
+
+admin.site.register(Unidad, AdminUnidad)
 
 
 class AdminEquipo(admin.ModelAdmin):
@@ -64,15 +77,62 @@ class AdminEquipo(admin.ModelAdmin):
         return ", ".join([unidad.nombre for unidad in obj.unidades.all()])
 
 
+admin.site.register(Equipo, AdminEquipo)
+
+
+# Modelos para Trafo y atributos relacionados
+class AccesorioInline(admin.TabularInline):
+    model = Accesorio
+    extra = 1
+
+
 class AdminTrafo(admin.ModelAdmin):
+    def accesorio_1(self, obj):
+        return ', '.join(
+            [
+                obj.accesorios.all()[0].tipo_accesorio.name,
+                'Instalado' if obj.accesorios.all()[0].instalado else 'No Instalado',
+                'En servicio ' if obj.accesorios.all()[0].en_servicio else 'Fuera de Servicio',
+                'Razón fuera de servicio: ' + obj.accesorios.all()[0].razon_fuera_servicio,
+            ]
+        )
+
+    accesorio_1.short_description = 'Accesorio 1'
+
+    def accesorio_2(self, obj):
+        return ', '.join(
+            [
+                obj.accesorios.all()[1].tipo_accesorio.name,
+                'Instalado' if obj.accesorios.all()[1].instalado else 'No Instalado',
+                'En servicio ' if obj.accesorios.all()[1].en_servicio else 'Fuera de Servicio',
+                'Razón fuera de servicio: ' + obj.accesorios.all()[1].razon_fuera_servicio,
+            ]
+        )
+
+    accesorio_2.short_description = 'Accesorio 2'
+
+    def accesorio_3(self, obj):
+        return ', '.join(
+            [
+                obj.accesorios.all()[2].tipo_accesorio.name,
+                'Instalado' if obj.accesorios.all()[2].instalado else 'No Instalado',
+                'En servicio ' if obj.accesorios.all()[2].en_servicio else 'Fuera de Servicio',
+                'Razón fuera de servicio: ' + obj.accesorios.all()[2].razon_fuera_servicio,
+            ]
+        )
+
+    accesorio_3.short_description = 'Accesorio 3'
+
     list_display = ['name', 'n_serie', 'ano_puesta_servicio', 'condicion_operacion', 'razon_fuera_servicio',
                     'problematica_operativa', 'indice_condicion', 'observaciones', 'n_devanados', 'kv_nominal_at',
-                    'kv_nominal_bt', 'tension_kv', 'elevacion_temperatura', 'tipo_servicio', 'configuracion', 'fase',
-                    'conexion', 'enfriamiento', 'mva', 'impedancia', 'marca', 'estatus_revision',
+                    'kv_nominal_bt', 'elevacion_temperatura', 'tipo_servicio', 'configuracion', 'fase',
+                    'conexion', 'enfriamiento', 'mva', 'tension', 'impedancia', 'marca',
+                    'accesorio_1', 'accesorio_2', 'accesorio_3', 'estatus_revision',
                     'fecha_revision_aprobada', 'create', 'modify', ]
     filter_horizontal = ('unidades', )
     list_filter = ['create', 'modify', ]
     search_fields = ['name', 'unidad__name', ]
+    inlines = [AccesorioInline, ]
     ordering = ['name', ]
 
     class Meta:
@@ -80,6 +140,33 @@ class AdminTrafo(admin.ModelAdmin):
 
     def display_unidades(self, obj):
         return ", ".join([unidad.nombre for unidad in obj.unidades.all()])
+
+
+admin.site.register(Trafo, AdminTrafo)
+
+
+class AdminAccesorio(admin.ModelAdmin):
+    list_display = ['instalado', 'en_servicio', 'razon_fuera_servicio', 'tipo_accesorio', 'trafo', 'get_unidades', ]
+    search_fields = ['trafo', ]
+    ordering = ['trafo', ]
+
+    class Meta:
+        model = Accesorio
+
+
+admin.site.register(Accesorio, AdminAccesorio)
+
+
+class AdminTipoAccesorio(admin.ModelAdmin):
+    list_display = ['name', ]
+    search_fields = ['name', ]
+    ordering = ['name', ]
+
+    class Meta:
+        model = TipoAccesorio
+
+
+admin.site.register(TipoAccesorio, AdminTipoAccesorio)
 
 
 class AdminTipoServicio(admin.ModelAdmin):
@@ -91,6 +178,9 @@ class AdminTipoServicio(admin.ModelAdmin):
         model = TipoServicio
 
 
+admin.site.register(TipoServicio, AdminTipoServicio)
+
+
 class AdminConfiguracion(admin.ModelAdmin):
     list_display = ['name', ]
     search_fields = ['name', ]
@@ -98,6 +188,9 @@ class AdminConfiguracion(admin.ModelAdmin):
 
     class Meta:
         model = Configuracion
+
+
+admin.site.register(Configuracion, AdminConfiguracion)
 
 
 class AdminFase(admin.ModelAdmin):
@@ -109,6 +202,9 @@ class AdminFase(admin.ModelAdmin):
         model = Fase
 
 
+admin.site.register(Fase, AdminFase)
+
+
 class AdminConexion(admin.ModelAdmin):
     list_display = ['name', ]
     search_fields = ['name', ]
@@ -116,6 +212,9 @@ class AdminConexion(admin.ModelAdmin):
 
     class Meta:
         model = Conexion
+
+
+admin.site.register(Conexion, AdminConexion)
 
 
 class AdminEnfriamiento(admin.ModelAdmin):
@@ -127,6 +226,9 @@ class AdminEnfriamiento(admin.ModelAdmin):
         model = Enfriamiento
 
 
+admin.site.register(Enfriamiento, AdminEnfriamiento)
+
+
 class AdminMVA(admin.ModelAdmin):
     list_display = ['mva_1', 'mva_2', 'mva_3', 'mva_4', ]
 
@@ -134,11 +236,27 @@ class AdminMVA(admin.ModelAdmin):
         model = MVA
 
 
+admin.site.register(MVA, AdminMVA)
+
+
+class AdminTension(admin.ModelAdmin):
+    list_display = ['tension_1', 'tension_2', 'tension_3', ]
+
+    class Meta:
+        model = Tension
+
+
+admin.site.register(Tension, AdminTension)
+
+
 class AdminImpedancia(admin.ModelAdmin):
     list_display = ['z_1', 'z_2', 'z_3', 'z_4', ]
 
     class Meta:
         model = Impedancia
+
+
+admin.site.register(Impedancia, AdminImpedancia)
 
 
 class AdminMarca(admin.ModelAdmin):
@@ -150,6 +268,10 @@ class AdminMarca(admin.ModelAdmin):
         model = Marca
 
 
+admin.site.register(Marca, AdminMarca)
+
+
+# Modelos para Pruebas
 class AdminPrueba(admin.ModelAdmin):
     list_display = ['matricula', 'trafo', 'get_unidades', 'get_central', 'get_subgerencia', 'get_eps', 'create',
                     'modify', ]
@@ -161,6 +283,10 @@ class AdminPrueba(admin.ModelAdmin):
         model = Prueba
 
 
+admin.site.register(Prueba, AdminPrueba)
+
+
+# Prueba Eléctrica de Trafos y atributos relacionados
 class AdminElectricaTrafo(admin.ModelAdmin):
     list_display = ['prueba', 'fecha_prueba', 'procesado_por', 'get_trafo', 'get_unidades', 'get_central',
                     'get_subgerencia', 'get_eps', 'create', 'modify', ]
@@ -170,6 +296,9 @@ class AdminElectricaTrafo(admin.ModelAdmin):
 
     class Meta:
         model = ElectricaTrafo
+
+
+admin.site.register(ElectricaTrafo, AdminElectricaTrafo)
 
 
 # class AdminRespuestaFrecuencia(admin.ModelAdmin):
@@ -184,6 +313,79 @@ class AdminElectricaTrafo(admin.ModelAdmin):
 #         model = RespuestaFrecuencia
 
 
+# admin.site.register(RespuestaFrecuencia, AdminRespuestaFrecuencia)
+
+
+# Prueba Cromatografía de gases y atributos relacionados
+class AdminEstatusPrueba(admin.ModelAdmin):
+    list_display = ['name', ]
+    search_fields = ['name', ]
+    ordering = ['name', ]
+
+    class Meta:
+        model = EstatusPrueba
+
+
+admin.site.register(EstatusPrueba, AdminEstatusPrueba)
+
+
+class AdminCromatografiaGases(admin.ModelAdmin):
+    list_display = ['prueba', 'estatus_prueba', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', ]
+    search_fields = ['prueba__matricula', ]
+    ordering = ['prueba__matricula', ]
+
+    class Meta:
+        model = CromatografiaGases
+
+
+admin.site.register(CromatografiaGases, AdminCromatografiaGases)
+
+
+class AdminCromatografiaGasesRelacionO2N2(admin.ModelAdmin):
+    list_display = ['cromatografia_gases', 'get_status', 'edad', 'o2', 'n2', 'o2entren2', 'h2', 'ch4', 'co', 'c2h6',
+                    'co2', 'c2h4', 'c2h2', 'total_gc', 'p_incremento', 'p_tgc_referencia', 'p_tgc_ultimo',
+                    'diferencial', 'absoluto', 'create', 'modify', ]
+    list_filter = ['create', 'modify', ]
+    search_fields = ['cromatografia_gases__prueba__matricula', ]
+    ordering = ['cromatografia_gases__prueba__matricula', ]
+
+    class Meta:
+        model = CromatografiaGasesRelacionO2N2
+
+
+admin.site.register(CromatografiaGasesRelacionO2N2, AdminCromatografiaGasesRelacionO2N2)
+
+
+class AdminDiferencialO2N2(admin.ModelAdmin):
+    list_display = ['cromatografia_gases', 'get_status', 'h2', 'ch4', 'co', 'c2h6', 'co2', 'c2h4', 'c2h2', 'create',
+                    'modify', ]
+    list_filter = ['create', 'modify', ]
+    search_fields = ['cromatografia_gases__prueba__matricula', ]
+    ordering = ['cromatografia_gases__prueba__matricula', ]
+
+    class Meta:
+        model = DiferencialO2N2
+
+
+admin.site.register(DiferencialO2N2, AdminDiferencialO2N2)
+
+
+class AdminVelocidadEntrePruebas(admin.ModelAdmin):
+    list_display = ['cromatografia_gases', 'get_status', 'meses_entre_pruebas', 'h2', 'ch4', 'co', 'c2h6', 'co2',
+                    'c2h4', 'c2h2', 'create', 'modify', ]
+    list_filter = ['create', 'modify', ]
+    search_fields = ['cromatografia_gases__prueba__matricula', ]
+    ordering = ['cromatografia_gases__prueba__matricula', ]
+
+    class Meta:
+        model = VelocidadEntrePruebas
+
+
+admin.site.register(VelocidadEntrePruebas, AdminVelocidadEntrePruebas)
+
+
+# Prueba Físico Químicas y atributos relacionados
 class AdminFisicoQuimica(admin.ModelAdmin):
     list_display = ['prueba', 'fecha_prueba', 'exploratoria_aceite', 'analisis_gases_disueltos', 'contenido_humedad',
                     'fp_liquido_25c', 'fp_liquido_100c', 'contenido_inhibidor_oxidacion', 'compuestos_furanicos',
@@ -199,21 +401,4 @@ class AdminFisicoQuimica(admin.ModelAdmin):
         model = FisicoQuimica
 
 
-admin.site.register(EPS, AdminEPS)
-admin.site.register(Subgerencia, AdminSubgerencia)
-admin.site.register(Central, AdminCentral)
-admin.site.register(Unidad, AdminUnidad)
-admin.site.register(Equipo, AdminEquipo)
-admin.site.register(Trafo, AdminTrafo)
-admin.site.register(TipoServicio, AdminTipoServicio)
-admin.site.register(Configuracion, AdminConfiguracion)
-admin.site.register(Fase, AdminFase)
-admin.site.register(Conexion, AdminConexion)
-admin.site.register(Enfriamiento, AdminEnfriamiento)
-admin.site.register(MVA, AdminMVA)
-admin.site.register(Impedancia, AdminImpedancia)
-admin.site.register(Marca, AdminMarca)
-admin.site.register(Prueba, AdminPrueba)
-admin.site.register(ElectricaTrafo, AdminElectricaTrafo)
-# admin.site.register(RespuestaFrecuencia, AdminRespuestaFrecuencia)
 admin.site.register(FisicoQuimica, AdminFisicoQuimica)

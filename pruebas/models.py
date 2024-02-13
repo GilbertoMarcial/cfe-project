@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+# EPS, Subgerencia, Central, Unidad y Equipo
 class EPS(models.Model):
     name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
     create = models.DateTimeField(auto_now_add=True, verbose_name='Creado')
@@ -112,7 +113,6 @@ class Trafo(Equipo):
     n_devanados = models.IntegerField(verbose_name='Número de Devanados')
     kv_nominal_at = models.FloatField(verbose_name='KV Nominal AT')
     kv_nominal_bt = models.FloatField(verbose_name='KV Nominal BT')
-    tension_kv = models.FloatField(verbose_name='Tensión KV')
     elevacion_temperatura = models.FloatField(verbose_name='Elevación de Temperatura')
     estatus_revision = models.CharField(verbose_name='Estatus de Revisión', choices=ESTATUS_CHOICES, default=P)
     fecha_revision_aprobada = models.DateField(verbose_name='Fecha de Revisión Aprobada', blank=True, null=True)
@@ -122,15 +122,56 @@ class Trafo(Equipo):
     conexion = models.ForeignKey('Conexion', on_delete=models.CASCADE, verbose_name='Conexión')
     enfriamiento = models.ForeignKey('Enfriamiento', on_delete=models.CASCADE, verbose_name='Enfriamiento')
     mva = models.ForeignKey('MVA', on_delete=models.CASCADE, verbose_name='MVA')
+    tension = models.ForeignKey('Tension', on_delete=models.CASCADE, verbose_name='Tensión kV')
     impedancia = models.ForeignKey('Impedancia', on_delete=models.CASCADE, verbose_name='Impedancia')
     marca = models.ForeignKey('Marca', on_delete=models.CASCADE, verbose_name='Marca')
+
+    def __str__(self):
+        unidades_ = ", ".join([unidad.name for unidad in self.unidades.all()])
+        central_ = self.unidades.first().central.name
+        subgerencia_ = self.unidades.first().central.subgerencia.name
+        eps_ = self.unidades.first().central.subgerencia.eps.name
+        return '%s [%s] - [%s] - [%s] - [%s]' % (self.name, unidades_, central_, subgerencia_, eps_)
+
+    class Meta:
+        verbose_name = 'Trafo'
+        verbose_name_plural = 'Trafos'
+        ordering = ['name', ]
+
+
+class Accesorio(models.Model):
+    instalado = models.BooleanField(verbose_name='Instalado', default=False)
+    en_servicio = models.BooleanField(verbose_name='En Servicio', default=False)
+    razon_fuera_servicio = models.TextField(verbose_name='Razón Fuera de Servicio', blank=True)
+    tipo_accesorio = models.ForeignKey('TipoAccesorio', on_delete=models.CASCADE, verbose_name='Tipo de Accesorio')
+    trafo = models.ForeignKey(Trafo, related_name='accesorios', on_delete=models.CASCADE, verbose_name='Trafo')
+
+    def __str__(self):
+        return self.tipo_accesorio.name
+
+    class Meta:
+        verbose_name = 'Accesorio'
+        verbose_name_plural = 'Accesorios'
+        ordering = ['tipo_accesorio', ]
+
+    @property
+    def get_trafo(self):
+        return self.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.trafo.unidades.all()])
+
+
+class TipoAccesorio(models.Model):
+    name = models.CharField(max_length=50, verbose_name='Nombre', unique=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Trafo'
-        verbose_name_plural = 'Trafos'
+        verbose_name = 'Tipo de Accesorio'
+        verbose_name_plural = 'Tipos de Accesorios'
         ordering = ['name', ]
 
 
@@ -206,6 +247,19 @@ class MVA(models.Model):
     class Meta:
         verbose_name = 'MVA'
         verbose_name_plural = 'MVA'
+
+
+class Tension(models.Model):
+    tension_1 = models.FloatField(verbose_name='Tensión 1', default=0)
+    tension_2 = models.FloatField(verbose_name='Tensión 2', default=0)
+    tension_3 = models.FloatField(verbose_name='Tensión 3', default=0)
+
+    def __str__(self):
+        return '%s / %s / %s' % (self.tension_1, self.tension_2, self.tension_3)
+
+    class Meta:
+        verbose_name = 'Tensión'
+        verbose_name_plural = 'Tensiones'
 
 
 class Impedancia(models.Model):
@@ -370,6 +424,30 @@ class CromatografiaGases(models.Model):
         verbose_name_plural = 'Cromatografías de Gases'
         ordering = ['prueba__matricula', ]
 
+    @property
+    def get_prueba(self):
+        return self.prueba.matricula
+
+    @property
+    def get_trafo(self):
+        return self.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
 
 class CromatografiaGasesRelacionO2N2(models.Model):
     edad = models.FloatField(verbose_name='Edad', null=True, blank=True)
@@ -406,6 +484,10 @@ class CromatografiaGasesRelacionO2N2(models.Model):
         return self.cromatografia_gases.prueba.matricula
 
     @property
+    def get_status(self):
+        return self.cromatografia_gases.estatus_prueba.name
+
+    @property
     def get_trafo(self):
         return self.cromatografia_gases.prueba.trafo.name
 
@@ -426,7 +508,7 @@ class CromatografiaGasesRelacionO2N2(models.Model):
         return self.cromatografia_gases.prueba.trafo.unidades.first().central.subgerencia.eps.name
 
 
-class Diferencial_O2N2(models.Model):
+class DiferencialO2N2(models.Model):
     h2 = models.FloatField(verbose_name='H2', null=True, blank=True)
     ch4 = models.FloatField(verbose_name='CH4', null=True, blank=True)
     co = models.FloatField(verbose_name='CO', null=True, blank=True)
@@ -449,6 +531,10 @@ class Diferencial_O2N2(models.Model):
     @property
     def get_prueba(self):
         return self.cromatografia_gases.prueba.matricula
+
+    @property
+    def get_status(self):
+        return self.cromatografia_gases.estatus_prueba.name
 
     @property
     def get_trafo(self):
@@ -495,6 +581,10 @@ class VelocidadEntrePruebas(models.Model):
     @property
     def get_prueba(self):
         return self.cromatografia_gases.prueba.matricula
+
+    @property
+    def get_status(self):
+        return self.cromatografia_gases.estatus_prueba.name
 
     @property
     def get_trafo(self):

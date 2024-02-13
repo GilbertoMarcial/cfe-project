@@ -1,0 +1,2124 @@
+digraph model_graph {
+  // Dotfile by Django-Extensions graph_models
+  // Created: 2024-02-12 11:14
+  // Cli Options: -a
+
+  fontname = "Roboto"
+  fontsize = 8
+  splines  = true
+  rankdir = "TB"
+
+  node [
+    fontname = "Roboto"
+    fontsize = 8
+    shape = "plaintext"
+  ]
+
+  edge [
+    fontname = "Roboto"
+    fontsize = 8
+  ]
+
+  // Labels
+  subgraph cluster_django_contrib_admin {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>django.contrib.admin</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    django_contrib_admin_models_LogEntry [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      LogEntry
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>AutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><B>content_type</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>user</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">action_flag</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">PositiveSmallIntegerField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">action_time</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">change_message</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">object_id</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">object_repr</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_django_contrib_auth {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>django.contrib.auth</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    django_contrib_auth_models_AbstractUser [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      AbstractUser<BR/>&lt;<FONT FACE="Roboto"><I>AbstractBaseUser,PermissionsMixin</I></FONT>&gt;
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">date_joined</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">email</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">EmailField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">first_name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">is_active</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">BooleanField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">is_staff</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">BooleanField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>is_superuser</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>BooleanField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>last_login</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>DateTimeField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">last_name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>password</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>CharField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">username</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    django_contrib_auth_models_Permission [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Permission
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>AutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>content_type</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">codename</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    django_contrib_auth_models_Group [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Group
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>AutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    django_contrib_auth_models_User [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      User<BR/>&lt;<FONT FACE="Roboto"><I>AbstractUser</I></FONT>&gt;
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>AutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>date_joined</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>DateTimeField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>email</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>EmailField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>first_name</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>CharField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>is_active</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>BooleanField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>is_staff</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>BooleanField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>is_superuser</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>BooleanField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>last_login</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>DateTimeField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>last_name</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto"><I>CharField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>password</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>CharField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>username</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>CharField</I></FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_django_contrib_contenttypes {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>django.contrib.contenttypes</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    django_contrib_contenttypes_models_ContentType [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      ContentType
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>AutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">app_label</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">model</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_django_contrib_sessions {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>django.contrib.sessions</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    django_contrib_sessions_base_session_AbstractBaseSession [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      AbstractBaseSession
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">expire_date</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">session_data</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    django_contrib_sessions_models_Session [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Session<BR/>&lt;<FONT FACE="Roboto"><I>AbstractBaseSession</I></FONT>&gt;
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I><B>session_key</B></I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I><B>CharField</B></I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>expire_date</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>DateTimeField</I></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><I>session_data</I></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><I>TextField</I></FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_rest_framework_authtoken {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>rest_framework.authtoken</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    rest_framework_authtoken_models_Token [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Token
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>key</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>CharField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>user</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>OneToOneField (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">created</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    rest_framework_authtoken_models_TokenProxy [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      TokenProxy
+      </B></FONT></TD></TR>
+    
+      </TABLE>
+      >]
+
+  }
+  subgraph cluster_pruebas {
+    label=<
+          <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+          <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER">
+          <FONT FACE="Roboto" COLOR="Black" POINT-SIZE="10">
+          <B>pruebas</B>
+          </FONT>
+          </TD></TR>
+          </TABLE>
+          >
+    color=olivedrab4
+    style="rounded"
+  
+    pruebas_models_EPS [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      EPS
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Subgerencia [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Subgerencia
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>eps</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Central [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Central
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>subgerencia</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">alias</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Unidad [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Unidad
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>central</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Equipo [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Equipo
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">ano_puesta_servicio</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">IntegerField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">condicion_operacion</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">indice_condicion</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">n_serie</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">observaciones</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">problematica_operativa</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">razon_fuera_servicio</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Trafo [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Trafo
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>equipo_ptr</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>OneToOneField (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>conexion</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>configuracion</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>enfriamiento</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>fase</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>impedancia</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>marca</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>mva</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>tipo_servicio</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">elevacion_temperatura</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">estatus_revision</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">fecha_revision_aprobada</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">kv_nominal_at</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">kv_nominal_bt</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">n_devanados</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">IntegerField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">tension_kv</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_TipoServicio [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      TipoServicio
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Configuracion [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Configuracion
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Fase [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Fase
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Conexion [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Conexion
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Enfriamiento [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Enfriamiento
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_MVA [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      MVA
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">mva_1</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">mva_2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">mva_3</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">mva_4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Impedancia [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Impedancia
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">z_1</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">z_2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">z_3</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">z_4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Marca [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Marca
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_Prueba [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      Prueba
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>trafo</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (equipo_ptr)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">matricula</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_ElectricaTrafo [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      ElectricaTrafo
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>prueba</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">fecha_prueba</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DateField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">procesado_por</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_EstatusPrueba [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      EstatusPrueba
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">name</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">CharField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_CromatografiaGases [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      CromatografiaGases
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>estatus_prueba</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>prueba</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_CromatografiaGasesRelacionO2N2 [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      CromatografiaGasesRelacionO2N2
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>cromatografia_gases</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">absoluto</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h6</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">ch4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">co</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">co2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">diferencial</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">edad</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">h2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">n2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">o2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">o2entren2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">p_incremento</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">p_tgc_referencia</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">p_tgc_ultimo</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">total_gc</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_DiferencialO2N2 [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      DiferencialO2N2
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>cromatografia_gases</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h6</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">ch4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">co</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">co2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">h2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_VelocidadEntrePruebas [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      VelocidadEntrePruebas
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>cromatografia_gases</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">c2h6</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">ch4</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">co</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">co2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">h2</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">meses_entre_pruebas</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+  
+    pruebas_models_FisicoQuimica [label=<
+      <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+      <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+      FisicoQuimica
+      </B></FONT></TD></TR>
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>id</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto"><B>prueba</B></FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">analisis_gases_disueltos</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">azufre_corrosivo</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">color</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">compuestos_furanicos</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">contenido_agua</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">contenido_humedad</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">contenido_inhibidor_oxidacion</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">contenido_inhibidor_oxidacion_especifico</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">create</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">examinacion_visual</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">exploratoria_aceite</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">factor_potencia</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">fecha_prueba</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">DateField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">fp_liquido_100c</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">fp_liquido_25c</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">humedad_resiudal</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">modify</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT COLOR="#7B7B7B" FACE="Roboto">DateTimeField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">nivel_neutralizacion</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">rigidez_dielectrica</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+    
+      <TR><TD ALIGN="LEFT" BORDER="0">
+      <FONT FACE="Roboto">tension_interfacial</FONT>
+      </TD><TD ALIGN="LEFT">
+      <FONT FACE="Roboto">FloatField</FONT>
+      </TD></TR>
+    
+    
+      </TABLE>
+      >]
+
+  }
+
+
+  // Relations
+
+  django_contrib_admin_models_LogEntry -> django_contrib_auth_models_User
+  [label=" user (logentry)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  django_contrib_admin_models_LogEntry -> django_contrib_contenttypes_models_ContentType
+  [label=" content_type (logentry)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  django_contrib_auth_base_user_AbstractBaseUser [label=<
+  <TABLE BGCOLOR="white" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+  <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="#1b563f">
+  <FONT FACE="Roboto" POINT-SIZE="12" COLOR="white">AbstractBaseUser</FONT>
+  </TD></TR>
+  </TABLE>
+  >]
+  django_contrib_auth_models_AbstractUser -> django_contrib_auth_base_user_AbstractBaseUser
+  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+  django_contrib_auth_models_PermissionsMixin [label=<
+  <TABLE BGCOLOR="white" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+  <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="#1b563f">
+  <FONT FACE="Roboto" POINT-SIZE="12" COLOR="white">PermissionsMixin</FONT>
+  </TD></TR>
+  </TABLE>
+  >]
+  django_contrib_auth_models_AbstractUser -> django_contrib_auth_models_PermissionsMixin
+  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
+  django_contrib_auth_models_Permission -> django_contrib_contenttypes_models_ContentType
+  [label=" content_type (permission)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  django_contrib_auth_models_Group -> django_contrib_auth_models_Permission
+  [label=" permissions (group)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  django_contrib_auth_models_User -> django_contrib_auth_models_Group
+  [label=" groups (user)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  django_contrib_auth_models_User -> django_contrib_auth_models_Permission
+  [label=" user_permissions (user)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  django_contrib_auth_models_User -> django_contrib_auth_models_AbstractUser
+  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
+
+
+  django_contrib_sessions_models_Session -> django_contrib_sessions_base_session_AbstractBaseSession
+  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
+
+  rest_framework_authtoken_models_Token -> django_contrib_auth_models_User
+  [label=" user (auth_token)"] [arrowhead=none, arrowtail=none, dir=both];
+
+  rest_framework_authtoken_models_TokenProxy -> rest_framework_authtoken_models_Token
+  [label=" proxy\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
+
+  pruebas_models_Subgerencia -> pruebas_models_EPS
+  [label=" eps (subgerencia)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Central -> pruebas_models_Subgerencia
+  [label=" subgerencia (central)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Unidad -> pruebas_models_Central
+  [label=" central (unidad)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Equipo -> pruebas_models_Unidad
+  [label=" unidades (equipo)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_TipoServicio
+  [label=" tipo_servicio (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Configuracion
+  [label=" configuracion (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Fase
+  [label=" fase (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Conexion
+  [label=" conexion (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Enfriamiento
+  [label=" enfriamiento (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_MVA
+  [label=" mva (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Impedancia
+  [label=" impedancia (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Marca
+  [label=" marca (trafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_Trafo -> pruebas_models_Equipo
+  [label=" multi-table\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
+  pruebas_models_Prueba -> pruebas_models_Trafo
+  [label=" trafo (prueba)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_ElectricaTrafo -> pruebas_models_Prueba
+  [label=" prueba (electricatrafo)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_CromatografiaGases -> pruebas_models_EstatusPrueba
+  [label=" estatus_prueba (cromatografiagases)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_CromatografiaGases -> pruebas_models_Prueba
+  [label=" prueba (cromatografiagases)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_CromatografiaGasesRelacionO2N2 -> pruebas_models_CromatografiaGases
+  [label=" cromatografia_gases (cromatografiagasesrelaciono2n2)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_DiferencialO2N2 -> pruebas_models_CromatografiaGases
+  [label=" cromatografia_gases (diferencialo2n2)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_VelocidadEntrePruebas -> pruebas_models_CromatografiaGases
+  [label=" cromatografia_gases (velocidadentrepruebas)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  pruebas_models_FisicoQuimica -> pruebas_models_Prueba
+  [label=" prueba (fisicoquimica)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+
+}
