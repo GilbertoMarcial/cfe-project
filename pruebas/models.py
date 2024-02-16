@@ -1,6 +1,8 @@
 # -*-coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from django.dispatch import receiver
+import math
 
 
 # EPS, Subgerencia, Central, Unidad y Equipo
@@ -64,7 +66,7 @@ class Unidad(models.Model):
     central = models.ForeignKey(Central, on_delete=models.CASCADE, verbose_name='Central')
 
     def __str__(self):
-        return '%s [%s]' % (self.name, self.central.name)
+        return '%s [%s - %s]' % (self.name, self.central.name, self.central.subgerencia.name)
 
     class Meta:
         verbose_name = 'Unidad'
@@ -378,25 +380,109 @@ class ElectricaTrafo(models.Model):
         return self.prueba.trafo.unidades.first().central.subgerencia.eps.name
 
 
-# class RespuestaFrecuencia(models.Model):
-#     zona_1 = models.FloatField(verbose_name='Zona 1')
-#     zona_2 = models.FloatField(verbose_name='Zona 2')
-#     zona_3 = models.FloatField(verbose_name='Zona 3')
-#     zona_4 = models.FloatField(verbose_name='Zona 4')
-#     comentarios = models.TextField(verbose_name='Comentarios', blank=True)
+# Prueba Eléctrica de Trafos - Respuesta de Frecuencia
+class RespuestaFrecuencia(models.Model):
+    zona_1 = models.FloatField(verbose_name='Zona 1')
+    zona_2 = models.FloatField(verbose_name='Zona 2')
+    zona_3 = models.FloatField(verbose_name='Zona 3')
+    zona_4 = models.FloatField(verbose_name='Zona 4')
+    comentarios = models.TextField(verbose_name='Comentarios', blank=True)
+    diferencia_realizacion_prueba = models.FloatField(verbose_name='Diferencia de Realización de Prueba', blank=True, null=True)
+    respuesta_frecuencia_dielectrica = models.FloatField(verbose_name='Respuesta de Frecuencia Dieléctrica', blank=True, null=True)
+
+    electrica_trafo = models.ForeignKey(ElectricaTrafo, on_delete=models.CASCADE, verbose_name='Prueba Eléctrica de Trafos')
+
+    def __str__(self):
+        return 'Zona 1: %s, Zona 2: %s, Zona 3: %s, Zona 4: %s' % (self.zona_1, self.zona_2, self.zona_3, self.zona_4)
+
+    class Meta:
+        verbose_name = 'Respuesta de Frecuencia'
+        verbose_name_plural = 'Respuestas de Frecuencia'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento
+class ResistenciaAislamiento(models.Model):
+    r_a_30_seg = models.FloatField(verbose_name='Resistencia de Aislamiento a 30 seg')
+    r_a_1_min = models.FloatField(verbose_name='Resistencia de Aislamiento a 1 min')
+    r_a_10_min = models.FloatField(verbose_name='Resistencia de Aislamiento a 10 min')
+    temperatura_prueba = models.FloatField(verbose_name='Temperatura de Prueba')
+    factor_k = models.FloatField(verbose_name='Factor K', blank=True, null=True)
+    indice_absorcion = models.FloatField(verbose_name='Índice de Absorción', blank=True, null=True)
+    indice_polarizacion = models.FloatField(verbose_name='Índice de Polarización', blank=True, null=True)
+
+    electrica_trafo = models.ForeignKey(ElectricaTrafo, on_delete=models.CASCADE, verbose_name='Prueba Eléctrica de Trafos')
+
+    class Meta:
+        verbose_name = 'Resistencia de Aislamiento'
+        verbose_name_plural = 'Resistencias de Aislamiento'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion
+# @receiver(models.signals.pre_save, sender=ResistenciaAislamiento)
+# def calculate_values(sender, instance, **kwargs):
+#     # Calcula el valor de factor_k
+#     instance.factor_k = math.pow(0.5, (40.00 - instance.temperatura_prueba) / 10)
 #
-#     electrica_trafo = models.ForeignKey(ElectricaTrafo, on_delete=models.CASCADE, verbose_name='Prueba Eléctrica de Trafos')
+#     # Calcula el valor de indice_absorcion
+#     instance.indice_absorcion = None if instance.r_a_30_seg == 0 else instance.r_a_1_min / instance.r_a_30_seg
 #
-#     def __str__(self):
-#         return 'Zona 1: %s, Zona 2: %s, Zona 3: %s, Zona 4: %s' % (self.zona_1, self.zona_2, self.zona_3, self.zona_4)
-#
-#     class Meta:
-#         verbose_name = 'Respuesta de Frecuencia'
-#         verbose_name_plural = 'Respuestas de Frecuencia'
-#
-#     @property
-#     def get_matricula(self):
-#         return self.electrica_trafo.prueba.matricula
+#     # Calcula el valor de indice_polarizacion
+#     instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CH
+class ResistenciaAislamientoCH(ResistenciaAislamiento):
+    # No hay atributos adicionales
+
+    class Meta:
+        verbose_name = 'Resistencia de Aislamiento - CH'
+        verbose_name_plural = 'Resistencias de Aislamiento - CH'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion
+@receiver(models.signals.pre_save, sender=ResistenciaAislamientoCH)
+def calculate_values(sender, instance, **kwargs):
+    # Calcula el valor de factor_k
+    instance.factor_k = math.pow(0.5, (40.00 - instance.temperatura_prueba) / 10)
+
+    # Calcula el valor de indice_absorcion
+    instance.indice_absorcion = None if instance.r_a_30_seg == 0 else instance.r_a_1_min / instance.r_a_30_seg
+
+    # Calcula el valor de indice_polarizacion
+    instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia
+
+
+# Prueba Eléctrica de Trafos - Capacitancia
+
+
+# Prueba Eléctrica de Trafos - TTR
+
+
+# Prueba Eléctrica de Trafos - Placa Boquilla
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia Boquilla
+
+
+# Prueba Eléctrica de Trafos - Resistencia Devanado AT
+
+
+# Prueba Eléctrica de Trafos - Resistencia Devanado BT
 
 
 # Prueba Cromatografía de gases y atributos relacionados
@@ -662,3 +748,4 @@ class FisicoQuimica(models.Model):
     @property
     def get_eps(self):
         return self.prueba.trafo.unidades.first().central.subgerencia.eps.name
+

@@ -301,19 +301,52 @@ class AdminElectricaTrafo(admin.ModelAdmin):
 admin.site.register(ElectricaTrafo, AdminElectricaTrafo)
 
 
-# class AdminRespuestaFrecuencia(admin.ModelAdmin):
-#     list_display = ['matricula', 'zona_1', 'zona_2', 'zona_3', 'zona_4', ]
-#     search_fields = ['electrica_trafo__prueba__matricula', ]
-#     ordering = ['electrica_trafo__prueba__matricula', ]
-#
-#     def matricula(self, obj):
-#         return obj.prueba.matricula
-#
-#     class Meta:
-#         model = RespuestaFrecuencia
+# Prueba Eléctrica de Trafos - Respuesta de Frecuencia
+class AdminRespuestaFrecuencia(admin.ModelAdmin):
+    list_display = ['matricula', 'zona_1', 'zona_2', 'zona_3', 'zona_4', 'comentarios', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    def matricula(self, obj):
+        return obj.electrica_trafo.prueba.matricula
+
+    class Meta:
+        model = RespuestaFrecuencia
 
 
-# admin.site.register(RespuestaFrecuencia, AdminRespuestaFrecuencia)
+admin.site.register(RespuestaFrecuencia, AdminRespuestaFrecuencia)
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento
+class AdminResistenciaAislamiento(admin.ModelAdmin):
+    list_display = ['matricula', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k', 'indice_absorcion', 'indice_polarizacion', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    def matricula(self, obj):
+        return obj.electrica_trafo.prueba.matricula
+
+    class Meta:
+        model = ResistenciaAislamiento
+
+
+admin.site.register(ResistenciaAislamiento, AdminResistenciaAislamiento)
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CH
+class AdminResistenciaAislamientoCH(admin.ModelAdmin):
+    list_display = ['matricula', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k', 'indice_absorcion', 'indice_polarizacion', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    def matricula(self, obj):
+        return obj.electrica_trafo.prueba.matricula
+
+    class Meta:
+        model = ResistenciaAislamientoCH
+
+
+admin.site.register(ResistenciaAislamientoCH, AdminResistenciaAislamientoCH)
 
 
 # Prueba Cromatografía de gases y atributos relacionados
@@ -402,3 +435,4 @@ class AdminFisicoQuimica(admin.ModelAdmin):
 
 
 admin.site.register(FisicoQuimica, AdminFisicoQuimica)
+
