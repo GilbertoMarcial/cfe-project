@@ -135,6 +135,18 @@ class Trafo(Equipo):
         eps_ = self.unidades.first().central.subgerencia.eps.name
         return '%s [%s] - [%s] - [%s] - [%s]' % (self.name, unidades_, central_, subgerencia_, eps_)
 
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.unidades.all()])
+
+    def get_central(self):
+        return self.unidades.first().central.name
+
+    def get_subgerencia(self):
+        return self.unidades.first().central.subgerencia.name
+
+    def get_eps(self):
+        return self.unidades.first().central.subgerencia.eps.name
+
     class Meta:
         verbose_name = 'Trafo'
         verbose_name_plural = 'Trafos'
@@ -403,6 +415,30 @@ class RespuestaFrecuencia(models.Model):
     def get_matricula(self):
         return self.electrica_trafo.prueba.matricula
 
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
 
 # Prueba Eléctrica de Trafos - Resistencia de Aislamiento
 class ResistenciaAislamiento(models.Model):
@@ -423,6 +459,30 @@ class ResistenciaAislamiento(models.Model):
     @property
     def get_matricula(self):
         return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
 
 
 # Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion
@@ -450,8 +510,32 @@ class ResistenciaAislamientoCH(ResistenciaAislamiento):
     def get_matricula(self):
         return self.electrica_trafo.prueba.matricula
 
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
 
-# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion CH
 @receiver(models.signals.pre_save, sender=ResistenciaAislamientoCH)
 def calculate_values(sender, instance, **kwargs):
     # Calcula el valor de factor_k
@@ -464,10 +548,447 @@ def calculate_values(sender, instance, **kwargs):
     instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
 
 
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CHL
+class ResistenciaAislamientoCHL(ResistenciaAislamiento):
+    # No hay atributos adicionales
+
+    class Meta:
+        verbose_name = 'Resistencia de Aislamiento - CHL'
+        verbose_name_plural = 'Resistencias de Aislamiento - CHL'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion CHL
+@receiver(models.signals.pre_save, sender=ResistenciaAislamientoCHL)
+def calculate_values(sender, instance, **kwargs):
+    # Calcula el valor de factor_k
+    instance.factor_k = math.pow(0.5, (40.00 - instance.temperatura_prueba) / 10)
+
+    # Calcula el valor de indice_absorcion
+    instance.indice_absorcion = None if instance.r_a_30_seg == 0 else instance.r_a_1_min / instance.r_a_30_seg
+
+    # Calcula el valor de indice_polarizacion
+    instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CL
+class ResistenciaAislamientoCL(ResistenciaAislamiento):
+    # No hay atributos adicionales
+
+    class Meta:
+        verbose_name = 'Resistencia de Aislamiento - CL'
+        verbose_name_plural = 'Resistencias de Aislamiento - CL'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion CL
+@receiver(models.signals.pre_save, sender=ResistenciaAislamientoCL)
+def calculate_values(sender, instance, **kwargs):
+    # Calcula el valor de factor_k
+    instance.factor_k = math.pow(0.5, (40.00 - instance.temperatura_prueba) / 10)
+
+    # Calcula el valor de indice_absorcion
+    instance.indice_absorcion = None if instance.r_a_30_seg == 0 else instance.r_a_1_min / instance.r_a_30_seg
+
+    # Calcula el valor de indice_polarizacion
+    instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CHT
+class ResistenciaAislamientoCHT(ResistenciaAislamiento):
+    # No hay atributos adicionales
+
+    class Meta:
+        verbose_name = 'Resistencia de Aislamiento - CHT'
+        verbose_name_plural = 'Resistencias de Aislamiento - CHT'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion CHT
+@receiver(models.signals.pre_save, sender=ResistenciaAislamientoCHT)
+def calculate_values(sender, instance, **kwargs):
+    # Calcula el valor de factor_k
+    instance.factor_k = math.pow(0.5, (40.00 - instance.temperatura_prueba) / 10)
+
+    # Calcula el valor de indice_absorcion
+    instance.indice_absorcion = None if instance.r_a_30_seg == 0 else instance.r_a_1_min / instance.r_a_30_seg
+
+    # Calcula el valor de indice_polarizacion
+    instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CT
+class ResistenciaAislamientoCT(ResistenciaAislamiento):
+    # No hay atributos adicionales
+
+    class Meta:
+        verbose_name = 'Resistencia de Aislamiento - CT'
+        verbose_name_plural = 'Resistencias de Aislamiento - CT'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Función que permite calcular valores para factor_k, indice_polarizacion e indice_absorcion CT
+@receiver(models.signals.pre_save, sender=ResistenciaAislamientoCT)
+def calculate_values(sender, instance, **kwargs):
+    # Calcula el valor de factor_k
+    instance.factor_k = math.pow(0.5, (40.00 - instance.temperatura_prueba) / 10)
+
+    # Calcula el valor de indice_absorcion
+    instance.indice_absorcion = None if instance.r_a_30_seg == 0 else instance.r_a_1_min / instance.r_a_30_seg
+
+    # Calcula el valor de indice_polarizacion
+    instance.indice_polarizacion = None if instance.r_a_1_min == 0 else instance.r_a_10_min / instance.r_a_1_min
+
+
 # Prueba Eléctrica de Trafos - Factor de Potencia
+class FactorPotencia(models.Model):
+    fp_referencia = models.FloatField(verbose_name='FP Referencia', blank=True, null=True)
+    corriente_ma = models.FloatField(verbose_name='Corriente (mA)', blank=True, null=True)
+    watts = models.FloatField(verbose_name='Watts', blank=True, null=True)
+    fp = models.FloatField(verbose_name='FP', blank=True, null=True)
+    p_fp_placa = models.FloatField(verbose_name='% FP Placa', blank=True, null=True)
+    velocidad_cambio_fp_placa = models.FloatField(verbose_name='Velocidad de Cambio FP Placa', blank=True, null=True)
+    aceleracion_fp_placa = models.FloatField(verbose_name='Aceleración FP Placa', blank=True, null=True)
+    p_fp = models.FloatField(verbose_name='% FP', blank=True, null=True)
+    velocidad_cambio_fp = models.FloatField(verbose_name='Velocidad de Cambio FP', blank=True, null=True)
+    aceleracion_fp = models.FloatField(verbose_name='Aceleración FP', blank=True, null=True)
+
+    electrica_trafo = models.ForeignKey(ElectricaTrafo, on_delete=models.CASCADE, verbose_name='Prueba Eléctrica de Trafos')
+
+    class Meta:
+        abstract = True
 
 
-# Prueba Eléctrica de Trafos - Capacitancia
+# Prueba Eléctrica de Trafos - Factor de Potencia - Tensión Prueba
+class DatosFP(FactorPotencia):
+    tension_prueba = models.FloatField(verbose_name='Tensión de Prueba')
+
+    def __str__(self):
+        return '%s' % (self.tension_prueba)
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CH
+class DatosFPCH(FactorPotencia):
+    tension_prueba = models.ForeignKey(DatosFP, on_delete=models.CASCADE, verbose_name='Tensión de Prueba')
+
+    class Meta:
+        verbose_name = 'Datos Factor de Potencia - CH'
+        verbose_name_plural = 'Datos Factores de Potencia - CH'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CHL
+class DatosFPCHL(FactorPotencia):
+    tension_prueba = models.ForeignKey(DatosFP, on_delete=models.CASCADE, verbose_name='Tensión de Prueba')
+
+    class Meta:
+        verbose_name = 'Datos Factor de Potencia - CHL'
+        verbose_name_plural = 'Datos Factores de Potencia - CHL'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CL
+class DatosFPCL(FactorPotencia):
+    tension_prueba = models.ForeignKey(DatosFP, on_delete=models.CASCADE, verbose_name='Tensión de Prueba')
+
+    class Meta:
+        verbose_name = 'Datos Factor de Potencia - CL'
+        verbose_name_plural = 'Datos Factores de Potencia - CL'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CHT
+class DatosFPCHT(FactorPotencia):
+    tension_prueba = models.ForeignKey(DatosFP, on_delete=models.CASCADE, verbose_name='Tensión de Prueba')
+
+    class Meta:
+        verbose_name = 'Datos Factor de Potencia - CHT'
+        verbose_name_plural = 'Datos Factores de Potencia - CHT'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CT
+class DatosFPCT(FactorPotencia):
+    tension_prueba = models.ForeignKey(DatosFP, on_delete=models.CASCADE, verbose_name='Tensión de Prueba')
+
+    class Meta:
+        verbose_name = 'Datos Factor de Potencia - CT'
+        verbose_name_plural = 'Datos Factores de Potencia - CT'
+
+    @property
+    def get_matricula(self):
+        return self.electrica_trafo.prueba.matricula
+
+    @property
+    def get_date(self):
+        return self.electrica_trafo.fecha_prueba
+
+    @property
+    def get_trafo(self):
+        return self.electrica_trafo.prueba.trafo.name
+
+    @property
+    def get_unidades(self):
+        return ", ".join([unidad.name for unidad in self.electrica_trafo.prueba.trafo.unidades.all()])
+
+    @property
+    def get_central(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.name
+
+    @property
+    def get_subgerencia(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.name
+
+    @property
+    def get_eps(self):
+        return self.electrica_trafo.prueba.trafo.unidades.first().central.subgerencia.eps.name
+
+
+# # Prueba Eléctrica de Trafos - Capacitancia
 
 
 # Prueba Eléctrica de Trafos - TTR

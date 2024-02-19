@@ -123,12 +123,12 @@ class AdminTrafo(admin.ModelAdmin):
 
     accesorio_3.short_description = 'Accesorio 3'
 
-    list_display = ['name', 'n_serie', 'ano_puesta_servicio', 'condicion_operacion', 'razon_fuera_servicio',
-                    'problematica_operativa', 'indice_condicion', 'observaciones', 'n_devanados', 'kv_nominal_at',
-                    'kv_nominal_bt', 'elevacion_temperatura', 'tipo_servicio', 'configuracion', 'fase',
-                    'conexion', 'enfriamiento', 'mva', 'tension', 'impedancia', 'marca',
-                    'accesorio_1', 'accesorio_2', 'accesorio_3', 'estatus_revision',
-                    'fecha_revision_aprobada', 'create', 'modify', ]
+    list_display = ['name', 'get_unidades', 'get_central', 'get_subgerencia', 'get_eps', 'n_serie',
+                    'ano_puesta_servicio', 'condicion_operacion', 'razon_fuera_servicio', 'problematica_operativa',
+                    'indice_condicion', 'observaciones', 'n_devanados', 'kv_nominal_at', 'kv_nominal_bt',
+                    'elevacion_temperatura', 'tipo_servicio', 'configuracion', 'fase', 'conexion', 'enfriamiento',
+                    'mva', 'tension', 'impedancia', 'marca', 'accesorio_1', 'accesorio_2', 'accesorio_3',
+                    'estatus_revision', 'fecha_revision_aprobada', 'create', 'modify', ]
     filter_horizontal = ('unidades', )
     list_filter = ['create', 'modify', ]
     search_fields = ['name', 'unidad__name', ]
@@ -137,9 +137,6 @@ class AdminTrafo(admin.ModelAdmin):
 
     class Meta:
         model = Trafo
-
-    def display_unidades(self, obj):
-        return ", ".join([unidad.nombre for unidad in obj.unidades.all()])
 
 
 admin.site.register(Trafo, AdminTrafo)
@@ -303,12 +300,11 @@ admin.site.register(ElectricaTrafo, AdminElectricaTrafo)
 
 # Prueba Eléctrica de Trafos - Respuesta de Frecuencia
 class AdminRespuestaFrecuencia(admin.ModelAdmin):
-    list_display = ['matricula', 'zona_1', 'zona_2', 'zona_3', 'zona_4', 'comentarios', ]
+    list_display = ['get_matricula', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia', 'get_eps',
+                    'get_date', 'zona_1', 'zona_2', 'zona_3', 'zona_4', 'comentarios', 'diferencia_realizacion_prueba',
+                    'respuesta_frecuencia_dielectrica', ]
     search_fields = ['electrica_trafo__prueba__matricula', ]
     ordering = ['electrica_trafo__prueba__matricula', ]
-
-    def matricula(self, obj):
-        return obj.electrica_trafo.prueba.matricula
 
     class Meta:
         model = RespuestaFrecuencia
@@ -319,12 +315,10 @@ admin.site.register(RespuestaFrecuencia, AdminRespuestaFrecuencia)
 
 # Prueba Eléctrica de Trafos - Resistencia de Aislamiento
 class AdminResistenciaAislamiento(admin.ModelAdmin):
-    list_display = ['matricula', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k', 'indice_absorcion', 'indice_polarizacion', ]
+    list_display = ['get_matricula', 'get_date', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba',
+                    'factor_k', 'indice_absorcion', 'indice_polarizacion', ]
     search_fields = ['electrica_trafo__prueba__matricula', ]
     ordering = ['electrica_trafo__prueba__matricula', ]
-
-    def matricula(self, obj):
-        return obj.electrica_trafo.prueba.matricula
 
     class Meta:
         model = ResistenciaAislamiento
@@ -335,18 +329,77 @@ admin.site.register(ResistenciaAislamiento, AdminResistenciaAislamiento)
 
 # Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CH
 class AdminResistenciaAislamientoCH(admin.ModelAdmin):
-    list_display = ['matricula', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k', 'indice_absorcion', 'indice_polarizacion', ]
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k',
+                    'indice_absorcion', 'indice_polarizacion', ]
     search_fields = ['electrica_trafo__prueba__matricula', ]
     ordering = ['electrica_trafo__prueba__matricula', ]
-
-    def matricula(self, obj):
-        return obj.electrica_trafo.prueba.matricula
 
     class Meta:
         model = ResistenciaAislamientoCH
 
 
 admin.site.register(ResistenciaAislamientoCH, AdminResistenciaAislamientoCH)
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CHL
+class AdminResistenciaAislamientoCHL(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k',
+                    'indice_absorcion', 'indice_polarizacion', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = ResistenciaAislamientoCHL
+
+
+admin.site.register(ResistenciaAislamientoCHL, AdminResistenciaAislamientoCHL)
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CL
+class AdminResistenciaAislamientoCL(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k',
+                    'indice_absorcion', 'indice_polarizacion', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = ResistenciaAislamientoCL
+
+
+admin.site.register(ResistenciaAislamientoCL, AdminResistenciaAislamientoCL)
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CHT
+class AdminResistenciaAislamientoCHT(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k',
+                    'indice_absorcion', 'indice_polarizacion', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = ResistenciaAislamientoCHT
+
+
+admin.site.register(ResistenciaAislamientoCHT, AdminResistenciaAislamientoCHT)
+
+
+# Prueba Eléctrica de Trafos - Resistencia de Aislamiento - CT
+class AdminResistenciaAislamientoCT(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'r_a_30_seg', 'r_a_1_min', 'r_a_10_min', 'temperatura_prueba', 'factor_k',
+                    'indice_absorcion', 'indice_polarizacion', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = ResistenciaAislamientoCT
+
+
+admin.site.register(ResistenciaAislamientoCT, AdminResistenciaAislamientoCT)
 
 
 # Prueba Cromatografía de gases y atributos relacionados
@@ -418,6 +471,101 @@ class AdminVelocidadEntrePruebas(admin.ModelAdmin):
 admin.site.register(VelocidadEntrePruebas, AdminVelocidadEntrePruebas)
 
 
+# Prueba Eléctrica de Trafos - Factor de Potencia
+# Prueba Eléctrica de Trafos - Factor de Potencia - Tensión Prueba
+class AdminDatosFP(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'tension_prueba', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = DatosFP
+
+
+admin.site.register(DatosFP, AdminDatosFP)
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CH
+class AdminDatosFPCH(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'fp_referencia', 'corriente_ma', 'watts', 'fp', 'p_fp_placa',
+                    'velocidad_cambio_fp_placa', 'aceleracion_fp_placa', 'p_fp', 'velocidad_cambio_fp',
+                    'aceleracion_fp', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = DatosFPCH
+
+
+admin.site.register(DatosFPCH, AdminDatosFPCH)
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CHL
+class AdminDatosFPCHL(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'fp_referencia', 'corriente_ma', 'watts', 'fp', 'p_fp_placa',
+                    'velocidad_cambio_fp_placa', 'aceleracion_fp_placa', 'p_fp', 'velocidad_cambio_fp',
+                    'aceleracion_fp', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = DatosFPCHL
+
+
+admin.site.register(DatosFPCHL, AdminDatosFPCHL)
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CL
+class AdminDatosFPCL(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'fp_referencia', 'corriente_ma', 'watts', 'fp', 'p_fp_placa',
+                    'velocidad_cambio_fp_placa', 'aceleracion_fp_placa', 'p_fp', 'velocidad_cambio_fp',
+                    'aceleracion_fp', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = DatosFPCL
+
+
+admin.site.register(DatosFPCL, AdminDatosFPCL)
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CHT
+class AdminDatosFPCHT(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'fp_referencia', 'corriente_ma', 'watts', 'fp', 'p_fp_placa',
+                    'velocidad_cambio_fp_placa', 'aceleracion_fp_placa', 'p_fp', 'velocidad_cambio_fp',
+                    'aceleracion_fp', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = DatosFPCHT
+
+
+admin.site.register(DatosFPCHT, AdminDatosFPCHT)
+
+
+# Prueba Eléctrica de Trafos - Factor de Potencia - CT
+class AdminDatosFPCT(admin.ModelAdmin):
+    list_display = ['get_matricula', 'get_date', 'get_trafo', 'get_unidades', 'get_central', 'get_subgerencia',
+                    'get_eps', 'fp_referencia', 'corriente_ma', 'watts', 'fp', 'p_fp_placa',
+                    'velocidad_cambio_fp_placa', 'aceleracion_fp_placa', 'p_fp', 'velocidad_cambio_fp',
+                    'aceleracion_fp', ]
+    search_fields = ['electrica_trafo__prueba__matricula', ]
+    ordering = ['electrica_trafo__prueba__matricula', ]
+
+    class Meta:
+        model = DatosFPCT
+
+
+admin.site.register(DatosFPCT, AdminDatosFPCT)
+
+
 # Prueba Físico Químicas y atributos relacionados
 class AdminFisicoQuimica(admin.ModelAdmin):
     list_display = ['prueba', 'fecha_prueba', 'exploratoria_aceite', 'analisis_gases_disueltos', 'contenido_humedad',
@@ -435,4 +583,3 @@ class AdminFisicoQuimica(admin.ModelAdmin):
 
 
 admin.site.register(FisicoQuimica, AdminFisicoQuimica)
-
